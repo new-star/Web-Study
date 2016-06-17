@@ -1,0 +1,102 @@
+jquery选择器
+	1、:first  选取元素的第一个子元素；
+	2、:eq(index)  按照索引选取，选取元素的第index+1个元素，index从0开始。
+	3、p:contains(text) text为文本内容，查找文本内容里含有text的元素p。
+	4、li:has(selector) 获取选择器中包含指定元素名称的全部元素。
+	5、:hidden   获取隐藏的元素或元素内容。
+	6、:visible过滤选择器   获取全部可见的元素。
+	7、[attribute=value]属性选择器   如li[title='我喜欢'] 获取指定属性和对应值的全部元素。
+	8、[attribute!=value] 功能与7正好相反。
+	9、[attribute*=value] 获取属性值中包含指定内容的元素。如li[title*='my']
+	10、：first-child子元素过滤器  获取每个父元素中返回的首个子元素，结果为一个集合。
+	11、:last-child 功能与10类似，差别是返回最后一个子元素。
+表单选择器：
+	:input  获取所有的表单元素，包括<textare>\<select>、<button>,用法为$("#frmTest :input").#frmTest后面必须有空格。
+	:text  表单文本选择器，获取全部单行的文本输入框，用法：$("#frmTest :text").
+	：password 密码框选择器，用法与text类似；
+	:radio 单选按钮选择器，用法与text类似。
+	:checkbox 复选框选择器；:image 图像区域选择器。
+	:submit  提交按钮选择器，用法 $("#frmTest input:submit")；
+	：button  按钮选择器，只能获取"type"属性值为"button"的input和<button>两种按钮。
+	:cheked  选中状态选择器，获取复选框和单选按钮处于选中状态的全部元素，可以选择隐藏的元素。
+	:selected 选中状态选择器，用于选择select下拉列表中处于选中状态的元素，为一个集合。
+jQuery操作DOM元素
+	1、attr() 设置或返回元素的属性，attr(属性)是获取属性的值；attr(属性名，属性值)为设置属性
+	2、html()和text()操作元素内容：括号内无内容时，指的是获取元素内容；括号内有内容时，表示将参数值设置为元素内容。
+	   区别：html()获取或设置的内容包括格式一起；而text()只获取或设置元素的文本内容。
+	3、addClass()和css()  操作元素的样式
+	   前者为增加元素的样式名称，后者包括属性和样式属性值。
+	4、removeAttr(name)和removeClass(class)移除属性和样式
+	5、appendTo()  方法向被选元素插入内容 $(content).appendTo(selector);把content的内容插入到selector元素内。默认在尾部
+	6、before()和after()在元素  在整个元素的前后插入内容
+		用法 $(selector).after(content)。content为插入的内容。
+	7、clone()  复制元素  括号内没有参数。复制元素、节点、属性、样式
+	8、wrap()和wrapInner() 包裹元素和内容
+	  用法为$(selector).wrap("<div></div>")和$(selector).wrapInner(wrapper)
+	9、each()方法遍历元素 通过回掉函数返回遍历元素的序列号
+	   格式  $(selector).each(function(index))；index为元素的序列号，从0开始
+	10、remove()和empty()  删除元素
+	  前者删除指定需要删除的元素，后者只删除所选元素的子元素--没有参数。
+jquery事件与应用
+	1、ready()页面加载出发事件
+	   与onload的区别：前者只要页面加载DOM后便触发；后者必须在页面全部元素加载成功才出发，可以写多个，按顺序执行。
+	  $(document).ready(function(){})等价于$(function(){});
+	2、bind()绑定元素事件
+	   用法  $(selector).bind(event1 event2..,[data] function)；如果event为多个事件时用空格隔开。
+	3、hover()方法  切换事件
+	   用法  $(selector).hover(over，out);鼠标移入执行over事件，移出执行out事件。
+	4、toggle() 在click事件上绑定两个或多个事件，还可以实现元素的隐藏与显示切换。1.9.0后的版本不支持。
+	   $(function () {
+                $("#btntest").bind("click", function () {
+                	$("div").toggle();  //无参数对象，元素显示则隐藏，否则就显示。
+                })
+            });
+	5、one()方法绑定元素的一次性事件   对任何事件有效，但是该事件只会触发一次。
+	6、focus()和blur()事件
+	  文本框的聚焦和失去焦点事件，或者使用bind绑定事件
+	7、change()下拉列表的绑定事件
+	   下来列表的值发生变化时则会触发此事件。$("select").bind("change",fun);
+	8、live()绑定事件，与bind的区别是，除了可以绑定可执行事件外，还可以绑定动态绑定的事件。1.7版本后就不再用。
+jQuery的动画特效
+	1、show()和hide()显示和隐藏元素
+	  用法  $(selector).hide(speed,[callback])和$(selector).show(speed,[callback])
+	2、toggle()实现显示和隐藏的动画
+	    $("ul").toggle(speed,function(){});speed为以毫秒为单位的数字，或者为fast,slow等字符。
+	3、slideUp(speed,fun)和slideDown(speed,fun)的滑动效果
+	   元素向下和向上滑动；滑动和淡入淡出的区别：前者改变元素的高度，后者改变元素的透明度。
+	4、sliadeToggle()实现图片"变脸"效果。可以切换sliadeUp和slideDown,自动识别元素当前状态是往上还是往下。
+	5、fadeIn()和fadeOut（）元素的淡入和淡出事件
+	6、fadeTo()设置元素淡入淡出效果的不透明度
+	   用法  $(selector).fadeTo(speed,opacity,[callback])；opacity为不透明度的值，范围是0~1.0
+	   如$(select).fadeTo(1000,0.4);
+	7、animate()制作简单的自定义动画效果  ,要使页面中的元素(element)以动画效果移动，必须首先将该元素的“position”属性设置成为“relative”或“absolute”.
+	   用法  $(selector).animate({params},speed,[callback])；
+	     params为css属性名和值，speed为动画执行速度。
+		$("div").animate({
+		   width:"+=80px",   //往右执行
+		   height:"+=100px"  //往下执行
+		},3000,function(){});
+	8、stop()和delay()方法分别为停止和延时执行动画。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+addClass(bg_blue)；修改元素的背景色。addClass(red);修改字的边框颜色。	
